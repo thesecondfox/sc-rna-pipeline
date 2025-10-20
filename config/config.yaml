@@ -1,0 +1,35 @@
+# Single Cell RNA-seq Pipeline Configuration
+
+# Quality Control Parameters
+quality_control:
+  min_genes: 200
+max_genes: 6000
+max_pct_mito: 20.0
+doublet_method: "scrublet"  # Options: scrublet, none
+doublet_threshold: 0.25
+Integration Parameters
+integration:
+method: "harmony"  # Options: harmony, combat, none
+batch_key: "SampleName"
+n_pcs: 30
+n_neighbors: 10
+resolution: 1.1
+gene_num: 2000
+umap_min_dist: 0.5
+Annotation Parameters (optional)
+annotation:
+run_annotation: false
+celltypist_model: null
+Output Parameters
+output:
+output_dir: "./results"
+save_intermediate: true
+HPC Parameters
+hpc:
+queue: "c01"
+num_cores: 88
+memory: "200G"
+Logging
+logging:
+level: "INFO"  # Options: DEBUG, INFO, WARNING, ERROR
+log_file: "pipeline.log"
