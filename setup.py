@@ -11,7 +11,7 @@ setup(
     version="1.0.0",
     author="thesecondfox",
     author_email="thesecondfox@users.noreply.github.com",
-    description="A complete single-cell RNA-seq analysis pipeline",
+    description="A modular single-cell RNA-seq analysis pipeline with transfer and monitoring capabilities",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/thesecondfox/sc-rna-pipeline",
@@ -21,6 +21,9 @@ setup(
         "Source Code": "https://github.com/thesecondfox/sc-rna-pipeline",
     },
     packages=find_packages(),
+    package_data={
+        'sc_pipeline': ['config/*.yaml'],
+    },
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Science/Research",
@@ -35,95 +38,14 @@ setup(
     ],
     python_requires=">=3.8",
     install_requires=requirements,
+    extras_require={
+        'transfer': ['paramiko>=2.7.0'],
+        'dev': ['pytest>=6.0', 'black>=21.0', 'flake8>=3.9'],
+    },
     entry_points={
         "console_scripts": [
-            "sc-pipeline=sc_pipeline:main",
+            "sc-pipeline=sc_pipeline.main:main",
         ],
     },
-    keywords="single-cell RNA-seq bioinformatics scanpy genomics",
+    keywords="single-cell RNA-seq bioinformatics scanpy genomics file-transfer memory-monitoring",
 )
-```
-
-## 5. .gitignore
-```
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# Virtual environments
-venv/
-ENV/
-env/
-.venv
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# Data files (don't commit large data)
-*.h5ad
-*.csv
-*.tsv
-*.mtx
-*.gz
-*.h5
-*.loom
-
-# Results
-results/
-output/
-logs/
-*.out
-*.err
-
-# Temporary files
-tmp/
-temp/
-.cache/
-
-# OS
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Keep example files
-!example/*.csv
-!example/*.md
-
-# Keep documentation
-!docs/**/*
-
-# Keep tests
-!tests/**/*
